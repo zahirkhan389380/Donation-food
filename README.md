@@ -33,6 +33,9 @@ Users can see the food items submitted by hotels, including the name of the food
 If a user wants an item, they can select it, and it will be removed from the food list.
 This page is connected with the front pages, complaint, and hotel form.
 
+7. Private
+   In private the owner of the website can see all the complaints sent by the users. This page allows the owner to manage and address the issues reported by the users.
+   
 # Technologies Used
 1.HTML
 2.CSS
