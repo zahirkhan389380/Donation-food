@@ -1,0 +1,122 @@
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+    font-family: 'Arial', sans-serif;
+}
+
+body {
+    background-color: #f4f4f9;
+    color: #333;
+}
+
+.container 
+{
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: #fff;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.row h1 {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.imgWrapper {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 20px;
+}
+
+.imgWrapper img {
+    width: 100%;
+    max-width: 300px;
+    height: auto;
+    border-radius: 20px;
+}
+
+.container p {
+    margin-top: 20px;
+    padding: 15px;
+    background-color: #e2e7e7;
+    border-radius: 10px;
+    line-height: 1.6;
+}
+
+.container button {
+    display: block;
+    width: 200px;
+    margin: 20px auto 0;
+    padding: 10px;
+    background-color: #333;
+    color: #f80b0b;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    text-align: center;
+}
+
+.container button:hover {
+    background-color: #555;
+}
+
+.id2 {
+    max-width: 800px;
+    margin: 20px auto;
+    padding: 20px;
+    background-color: #fff;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.id2 .row2 {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 20px;
+}
+
+.id2 img {
+    width: 100%;
+    max-width: 300px;
+    height: auto;
+    border-radius: 20px;
+}
+
+.id2 p {
+    
+    margin-top: 20px;
+    padding: 15px;
+    background-color: #e2e7e7;
+    border-radius: 10px;
+    line-height: 1.6;
+}
+
+.id2 button {
+    display: block;
+    width: 200px;
+    margin: 20px auto 0;
+    padding: 10px;
+    background-color: #333;
+    color: #f80b0b;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    text-align: center;
+}
+
+.id2 button:hover {
+    background-color: #555;
+}
+
+.pag {
+    max-width: 800px;
+    margin: 20px auto;
+    padding: 20px;
+    background-color: #fff;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    line-height: 1.6;
+}

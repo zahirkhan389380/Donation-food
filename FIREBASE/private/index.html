@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Complaint Section</title>
+    <link rel="stylesheet" href="./style1.css">
+</head>
+<body>
+    <header>
+        <div class="food">
+            <h1>This is the complaint section</h1>
+            <nav>
+                <ul>
+                    <li><a href="../HOTEL FORM/index.html">HOME</a></li>
+                    <li><a href="../complain/index.html">CONTACT US</a></li>
+                    <li><a href="../About me/index.html">ABOUT ME</a></li>
+                    <li><a href="../About Us/index.html">ABOUT US</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+    <main class="container">
+        <form id="contactForm">
+            <h3>Enter Your Details</h3>
+            <input type="text" id="username" placeholder="Username" required>
+            <input type="text" id="password" placeholder="Password" required>
+            <button type="submit">Submit</button>
+        </form>
+    </main>
+    <footer>
+        <h1>About Us</h1>
+        <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Voluptas ab ad sed similique unde corporis.</p>
+    </footer>
+    <script>
+        document.getElementById('contactForm').addEventListener('submit', function(event) {
+            event.preventDefault();
+            func();
+        });
+
+        function func() {
+            var user = document.getElementById("username").value;
+            var pass = document.getElementById("password").value;
+            if (user === 'zahir' && pass === '123456') {
+                alert("success full");
+                window.location.assign("desh.html");
+            } else {
+                alert("wrong");
+            }
+        }
+    </script>
+</body>
+</html>

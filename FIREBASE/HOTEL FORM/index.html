@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Food Donation Form</title>
+    <link href="https://fonts.googleapis.com/css?family=Roboto|Sriracha&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="./style.css">
+</head>
+
+<body>
+    <header>
+        <nav class="navbar">
+            <h1>LADAKH FOOD DONATION WEBSITE</h1>
+            <ul>
+                <li><a href="../LIST/index.html">FoodList</a></li>
+                <li><a href="../complain/index.html">Complain</a></li>
+                <li><a href="../HOME/pr.html">Home</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <div class="container">
+        <form id="donationForm">
+            <input type="text" name="hotel" id="hotel" placeholder="Enter the hotel name" required>
+            <input type="text" name="food" id="food" placeholder="Enter the food description" required>
+            <input type="tel" name="phone" id="phone" placeholder="Enter your phone number" required>
+            <textarea name="address" id="address" placeholder="Enter your address " rows="6" cols="60" required></textarea>
+            <input type="email" name="email" id="email" placeholder="Enter your email" required><br>
+            <input type="datetime-local" id="datetime" name="datetime" required><br>
+            <button type="submit" class="btn">Submit</button>
+            <div class="alert" style="display: none;">Form submitted successfully!</div>
+        </form>
+    </div>
+
+    <footer>
+        <div class="footer-content">
+            <div class="footer-section about">
+                <h3>About Us</h3>
+                <p>Our mission is to facilitate the donation of food items to those in need, helping to reduce food waste and hunger.</p>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2024 Donate Food items. All rights reserved.</p>
+        </div>
+    </footer>
+    <script type="module">
+      
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/9.0.0/firebase-app.js";
+        import { getDatabase, ref, push, set } from "https://www.gstatic.com/firebasejs/9.0.0/firebase-database.js";
+        import { getAnalytics } from "https://www.gstatic.com/firebasejs/9.0.0/firebase-analytics.js";
+
+    
+        const firebaseConfig = {
+            apiKey: "AIzaSyCzH1dneA5yvBS1yplkV5J5Uk36OScN3PY",
+            authDomain: "zahir-khan-cd8d1.firebaseapp.com",
+            databaseURL: "https://zahir-khan-cd8d1-default-rtdb.firebaseio.com",
+            projectId: "zahir-khan-cd8d1",
+            storageBucket: "zahir-khan-cd8d1.appspot.com",
+            messagingSenderId: "882366704194",
+            appId: "1:882366704194:web:a5a18eb68681059fd49bdb",
+            measurementId: "G-6W0SP694ZB"
+        };
+    
+        const app = initializeApp(firebaseConfig);
+        const database = getDatabase(app);
+        const analytics = getAnalytics(app);
+
+    
+        const donationFormDB = ref(database, 'zahir_khan/donationForm');
+
+        document.getElementById("donationForm").addEventListener("submit", submitForm);
+
+        function submitForm(e) {
+            e.preventDefault();
+
+            const hotel = getElementVal("hotel");
+            const food = getElementVal("food");
+            const phone = getElementVal("phone");
+            const address = getElementVal("address");
+            const email = getElementVal("email");
+            const datetime = getElementVal("datetime");
+
+            saveMessages(hotel, food, phone, address, email, datetime);
+            document.querySelector(".alert").style.display = "block";
+
+            // Remove the alert after 3 seconds
+            setTimeout(() => {
+                document.querySelector(".alert").style.display = "none";
+            }, 3000);
+
+            
+            document.getElementById("donationForm").reset();
+        }
+
+        const saveMessages = (hotel, food, phone, address, email, datetime) => {
+            const newDonationForm = push(donationFormDB);
+
+            set(newDonationForm, {
+                hotel: hotel,
+                food: food,
+                phone: phone,
+                address: address,
+                email: email,
+                datetime: datetime,
+            });
+        };
+
+        const getElementVal = (id) => {
+            return document.getElementById(id).value;
+        };
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,114 @@
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background-image: url("../front/banner.jpg");
+    background-size: cover;
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f4;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    min-height: 100vh;
+}
+
+header {
+   
+    width: 100%;
+    padding: 20px 0;
+    background-color: black;
+    color: white;
+    text-align: center;
+}
+
+header:hover {
+    background-color: red;
+    color: black;
+}
+
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 20px;
+}
+
+.navbar ul {
+    list-style: none;
+    display: flex;
+}
+
+.navbar ul li {
+    margin-left: 20px;
+}
+
+.navbar ul li a {
+    color: white;
+    text-decoration: none;
+    font-size: 18px;
+}
+
+.navbar ul li a:hover {
+    color: lightgray;
+}
+
+.content {
+    background-color: #eae7e6;
+    padding-left: 200px;
+    padding-right: 100px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    
+}
+thead th
+{
+    padding: 30px;
+}
+
+
+button {
+    border-radius: 30px;
+    background-color: rgb(0, 255, 47);
+    color: black;
+    border: none;
+    padding: 10px 20px;
+    cursor: pointer;
+    font-size: 16px;
+    text-decoration: none;
+}
+
+button:hover {
+    background-color: orange;
+}
+
+footer {
+    width: 100%;
+    margin-top: 300px;
+    background: black;
+    color: white;
+    text-align: center;
+    margin-top: 400px;
+   
+}
+
+.footer-content {
+    
+    display: flex;
+    justify-content: center;
+    margin-top: 80px;
+}
+
+.footer-section {
+    max-width: 300px;
+}
+
+.footer-bottom {
+    background: #222;
+    color: #fff;
+    padding: 10px 0;
+}

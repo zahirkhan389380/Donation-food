@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Item Details</title>
+    <link rel="stylesheet" href="./style2.css">
+</head>
+<body>
+    <header>
+        <nav class="navbar">
+            <h1>FOOD DONATION PLATFORM LEH</h1>
+            <ul>
+                <li><a href="../HOTEL FORM/index.html">Donate Food</a></li>
+                <li><a href="../complain/index.html">Complain</a></li>
+                <li><a href="../HOME/pr.html">Home</a></li>
+            </ul>
+        </nav>
+    </header>
+    <div class="content">
+        <h2>Item Details</h2>
+        <div id="itemDetails">
+            <!-- Item details will be displayed here -->
+        </div>
+        <button id="downloadPdfBtn">Download PDF</button>
+    </div>
+    <footer>
+        <div class="footer-content">
+            <div class="footer-section about">
+                <h3>About Us</h3>
+                <p>Our mission is to facilitate the donation of food items to those in need, helping to reduce food waste and hunger.</p>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2024 Donate Food. All rights reserved.</p>
+        </div>
+    </footer>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.4.0/jspdf.umd.min.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const params = new URLSearchParams(window.location.search);
+            const item = {
+                hotel: params.get('hotel'),
+                food: params.get('food'),
+                phone: params.get('phone'),
+                address: params.get('address'),
+                email: params.get('email'),
+                datetime: params.get('datetime')
+            };
+
+            if (item.hotel) {
+                document.getElementById('itemDetails').innerHTML = `
+                    <p>Hotel: ${item.hotel}</p>
+                    <p>Food: ${item.food}</p>
+                    <p>Phone: ${item.phone}</p>
+                    <p>Address: ${item.address}</p>
+                    <p>Email: ${item.email}</p>
+                    <p>Datetime: ${item.datetime}</p>
+                `;
+            }
+
+            document.getElementById('downloadPdfBtn').addEventListener('click', function() {
+                const { jsPDF } = window.jspdf;
+                const doc = new jsPDF();
+                doc.text(`Hotel: ${item.hotel}`, 10, 10);
+                doc.text(`Food: ${item.food}`, 10, 20);
+                doc.text(`Phone: ${item.phone}`, 10, 30);
+                doc.text(`Address: ${item.address}`, 10, 40);
+                doc.text(`Email: ${item.email}`, 10, 50);
+                doc.text(`Datetime: ${item.datetime}`, 10, 60);
+                doc.save('item-details.pdf');
+            });
+        });
+    </script>
+</body>
+</html>
+

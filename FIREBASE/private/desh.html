@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Complaints of the Customer</title>
+    <link rel="stylesheet" href="./style.css">
+    
+    <script src="https://www.gstatic.com/firebasejs/9.18.0/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.18.0/firebase-firestore.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.18.0/firebase-auth.js"></script>
+</head>
+<body>
+    <header>
+        <nav class="navbar">
+            <h1>Complaints of the Customer</h1>
+            <ul>
+                <li><a href="../HOTEL FORM/index.html">Donate Food</a></li>
+                <li><a href="../complain/index.html">Complain</a></li>
+                <li><a href="../HOME/pr.html">Home</a></li>
+            </ul>
+        </nav>
+    </header>
+    <div class="content">
+        <h2>LIST OF FOOD ITEMS</h2>
+        <table id="foodListTable">
+            <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Phone</th>
+                    <th>Email</th>
+                    <th>Message</th>
+                    <th>Delete</th>
+                </tr>
+            </thead>
+            <tbody id="foodList">
+                <!-- Data will be appended here -->
+            </tbody>
+        </table>
+    </div>
+    <footer>
+        <div class="footer-content">
+            <div class="footer-section about">
+                <h3>About Us</h3>
+                <p>Our mission is to facilitate the donation of food items to those in need, helping to reduce food waste and hunger.</p>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2024 Donate Food. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script>
+        // Your Firebase configuration
+        const firebaseConfig = {
+            apiKey: "AIzaSyAqQwegSn7TTdX4n9zRj9sd9Dogx3iFx_Y",
+            authDomain: "complain-8bbe9.firebaseapp.com",
+            projectId: "complain-8bbe9",
+            storageBucket: "complain-8bbe9.appspot.com",
+            messagingSenderId: "4559223209",
+            appId: "1:4559223209:web:20a430d5f7df83c3c2acb8",
+            measurementId: "G-W87P10C1E8" 
+        };
+
+        // Initialize Firebase
+        firebase.initializeApp(firebaseConfig);
+        const db = firebase.firestore();
+
+        document.addEventListener('DOMContentLoaded', function() {
+            const tableBody = document.getElementById('foodList');
+            
+            // Fetch data from Firestore
+            db.collection('complaints').get()
+                .then((querySnapshot) => {
+                    querySnapshot.forEach((doc) => {
+                        const data = doc.data();
+                        const row = document.createElement('tr');
+                        row.dataset.id = doc.id;
+                        row.innerHTML = `
+                            <td>${data.name}</td>
+                            <td>${data.phone}</td>
+                            <td>${data.email}</td>
+                            <td>${data.message}</td>
+                            <td><button onclick="deleteItem('${doc.id}', this)">Delete</button></td>
+                        `;
+                        tableBody.appendChild(row);
+                    });
+                })
+                .catch((error) => console.error('Error fetching data:', error));
+        });
+
+        function deleteItem(id, button) {
+            if (confirm('Are you sure you want to delete this message?')) {
+                // Delete data from Firestore
+                db.collection('complaints').doc(id).delete()
+                    .then(() => {
+                        alert('Item deleted successfully.');
+                        const row = button.closest('tr');
+                        row.parentNode.removeChild(row);
+                    })
+                    .catch((error) => console.error('Error deleting item:', error));
+            }
+        }
+    </script>
+</body>
+</html>

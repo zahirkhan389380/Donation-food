@@ -1,0 +1,163 @@
+body {
+    padding: 10px;
+    background-image: url("./banner.jpg");
+    background-size: cover;
+    font-family: 'Roboto', Arial, sans-serif;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    min-height: 100vh;
+    color: #333;
+}
+
+textarea {
+    resize: none;
+}
+
+header {
+    width: 100%;
+    padding: 20px 0;
+    background-color: #ff4500;
+    color: #fff;
+    text-align: center;
+    box-sizing: border-box;
+    margin: 0;
+}
+
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 20px;
+}
+
+.navbar ul {
+    list-style: none;
+    background-color: #fff;
+    color: #222;
+    display: flex;
+    margin: 0;
+    padding: 0;
+}
+
+.navbar ul li {
+    margin-left: 20px;
+}
+
+.navbar ul li a {
+    color: #e82727;
+    text-decoration: none;
+    font-size: 18px;
+}
+
+img.bg {
+    width: 100%;
+    height: auto;
+    opacity: 0.8;
+    border-radius: 10px;
+}
+
+.container {
+    background-color: rgba(255, 255, 255, 0.9);
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    width: 80%;
+    max-width: 600px;
+    margin: 20px 0;
+    text-align: center;
+}
+
+.container input {
+    width: 100%;
+    height: 40px;
+    margin-bottom: 20px;
+}
+
+form input {
+    width: 100%;
+}
+
+button {
+    border-radius: 30px;
+    background-color: #ff4500;
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+button:hover {
+    background-color: #e53935;
+}
+
+footer {
+    width: 100%;
+    background: #333;
+    color: #fff;
+    text-align: center;
+    padding: 20px 0;
+}
+
+.footer-content {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 10px;
+}
+
+.footer-section {
+    max-width: 300px;
+}
+
+.footer-bottom {
+    background: #222;
+    color: #fff;
+    padding: 10px 0;
+}
+
+/* Media Queries */
+
+@media (max-width: 768px) {
+    .navbar ul {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .navbar ul li {
+        margin-left: 0;
+        margin-bottom: 10px;
+    }
+
+    .container {
+        width: 90%;
+    }
+}
+
+@media (max-width: 480px) {
+    header {
+        padding: 10px 0;
+    }
+
+    .navbar h1 {
+        font-size: 20px;
+    }
+
+    .navbar ul li a {
+        font-size: 16px;
+    }
+
+    .container {
+        padding: 10px;
+    }
+
+    .container input, .container textarea {
+        width: 100%;
+    }
+
+    button {
+        width: 100%;
+        padding: 10px;
+    }
+}
