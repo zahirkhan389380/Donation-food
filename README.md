@@ -16,7 +16,8 @@ Food List:
 Users can see the food items submitted by hotels, including the food description, address, phone number, and pick-up time.
 If a user wants a food item, they can select it, and the item will be removed from the list. Another page will open where they can see the details of the food, and they can also download the food description.
 # Components 
-Home Pages:
+
+# Home Pages:
 
 These are the initial pages where users can learn about the initiative. Various images will motivate them to donate food.
 This page is connected to the hotel form, about us, about me, and complaint pages.
