@@ -6,9 +6,8 @@
     <title>Complaints of the Customer</title>
     <link rel="stylesheet" href="./style.css">
     
-    <script src="https://www.gstatic.com/firebasejs/9.18.0/firebase-app.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/9.18.0/firebase-firestore.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/9.18.0/firebase-auth.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.22.1/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.22.1/firebase-database.js"></script>
 </head>
 <body>
     <header>
@@ -50,49 +49,60 @@
         </div>
     </footer>
 
-    <script>
-        // Your Firebase configuration
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/9.22.1/firebase-app.js";
+        import { getDatabase, ref, onValue, remove } from "https://www.gstatic.com/firebasejs/9.22.1/firebase-database.js";
+
         const firebaseConfig = {
             apiKey: "AIzaSyAqQwegSn7TTdX4n9zRj9sd9Dogx3iFx_Y",
             authDomain: "complain-8bbe9.firebaseapp.com",
+            databaseURL: "https://complain-8bbe9-default-rtdb.firebaseio.com",
             projectId: "complain-8bbe9",
             storageBucket: "complain-8bbe9.appspot.com",
             messagingSenderId: "4559223209",
             appId: "1:4559223209:web:20a430d5f7df83c3c2acb8",
-            measurementId: "G-W87P10C1E8" 
+            measurementId: "G-W87P10C1E8"
         };
 
         // Initialize Firebase
-        firebase.initializeApp(firebaseConfig);
-        const db = firebase.firestore();
+        const app = initializeApp(firebaseConfig);
+        const database = getDatabase(app);
 
         document.addEventListener('DOMContentLoaded', function() {
             const tableBody = document.getElementById('foodList');
             
-            // Fetch data from Firestore
-            db.collection('complaints').get()
-                .then((querySnapshot) => {
-                    querySnapshot.forEach((doc) => {
-                        const data = doc.data();
+            // Fetch data from Firebase Realtime Database
+            const complaintsRef = ref(database, 'complaints');
+            onValue(complaintsRef, (snapshot) => {
+                tableBody.innerHTML = ''; // Clear the table body
+                if (snapshot.exists()) {
+                    snapshot.forEach((childSnapshot) => {
+                        const data = childSnapshot.val();
+                        console.log('Fetched data:', data);
                         const row = document.createElement('tr');
-                        row.dataset.id = doc.id;
+                        row.dataset.id = childSnapshot.key;
                         row.innerHTML = `
                             <td>${data.name}</td>
                             <td>${data.phone}</td>
                             <td>${data.email}</td>
                             <td>${data.message}</td>
-                            <td><button onclick="deleteItem('${doc.id}', this)">Delete</button></td>
+                            <td><button onclick="deleteItem('${childSnapshot.key}', this)">Delete</button></td>
                         `;
                         tableBody.appendChild(row);
                     });
-                })
-                .catch((error) => console.error('Error fetching data:', error));
+                } else {
+                    console.log('No complaints found.');
+                }
+            }, (error) => {
+                console.error('Error fetching data:', error);
+            });
         });
 
-        function deleteItem(id, button) {
+        window.deleteItem = function(id, button) {
             if (confirm('Are you sure you want to delete this message?')) {
-                // Delete data from Firestore
-                db.collection('complaints').doc(id).delete()
+                // Delete data from Firebase
+                const itemRef = ref(database, `complaints/${id}`);
+                remove(itemRef)
                     .then(() => {
                         alert('Item deleted successfully.');
                         const row = button.closest('tr');
@@ -104,3 +114,4 @@
     </script>
 </body>
 </html>
+
