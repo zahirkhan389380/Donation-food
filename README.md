@@ -11,7 +11,7 @@ Food List:
 Users can see the food items submitted by hotels, including the food description, address, phone number, and pick-up time.
 If a user wants a food item, they can select it, and the item will be removed from the list.  	
 
-##Components
+# Components
 1. Front Pages:
 These are the initial pages where users can learn about the initiative. Various images will motivate them to donate food.
 This page is connected to the hotel form, about us, about me, and complaint pages.
@@ -33,11 +33,13 @@ Users can see the food items submitted by hotels, including the name of the food
 If a user wants an item, they can select it, and it will be removed from the food list.
 This page is connected with the front pages, complaint, and hotel form.
 
-##Technologies Used
+# Technologies Used
 HTML
 CSS
 JavaScript
 firebase 
 
- 
 
+# Donaters
+
+![1](https://github.com/user-attachments/assets/f369da32-dbac-43f0-8caf-a4524742c52b)
