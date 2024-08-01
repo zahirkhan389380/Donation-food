@@ -3,7 +3,8 @@
  
 Project Description
 The main aim of this project is to stop food waste. Often, food left in hotels or homes is thrown into the dustbin. This project provides a platform for people to donate that food to those in need.
-How the Project Works
+
+# How the Project Works
 Hotel Form Submission:
 Donors (hotels) enter the name of the hotel, food description, address, phone number, and the time until which the food will be available for pick-up.
 Once the form is submitted, it is forwarded to the food list.
