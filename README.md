@@ -1,8 +1,12 @@
 # Donation-Food
+
 Project Description
+
+
 The main aim of this project is to stop food waste. Often, food left in hotels or homes is thrown into the dustbin. This project provides a platform for people to donate that food to those in need.
 
 # How the Project Works
+
 Hotel Form Submission:
 
 Donors (hotels) enter the name of the hotel, food description, address, phone number, and the time until which the food will be available for pick-up.
@@ -18,19 +22,19 @@ These are the initial pages where users can learn about the initiative. Various 
 This page is connected to the hotel form, about us, about me, and complaint pages.
 
 
-About Us Page:
+# About Us Page:
 
 This page provides information about the team and their mission.
 It is connected with the Home pages.
 
 
-About Me Page:
+# About Me Page:
 
 This page allows users to know more about the individual behind the initiative.
 It is connected with the Home pages.
 
 
-Complaint Page:
+# Complaint Page:
 
 Users can submit their complaints here, which will be stored in a MySQL database.
 This page is connected with the Home pages, hotel form, and food list.
@@ -41,14 +45,14 @@ Once the form is submitted, the information is forwarded to the food list.
 It is connected with the food list, complaint, and Home pages.
 
 
-Food List:
+# Food List:
 
 Users can see the food items submitted by hotels, including the name of the food, address, phone number, and the pick-up time.
 If a user wants an item, they can select it, and it will be removed from the food list.
 This page is connected with the Home pages, complaint, and hotel form.
 
 
-Private Page:
+# Private Page:
 
 The owner of the website can see all the complaints sent by the users. This page allows the owner to manage and address the issues reported by the users.
 This is connected with the Home page.
