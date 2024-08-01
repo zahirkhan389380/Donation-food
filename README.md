@@ -1,7 +1,7 @@
 # Donation-food
 
  
-Project Description
+# Project Description
 The main aim of this project is to stop food waste. Often, food left in hotels or homes is thrown into the dustbin. This project provides a platform for people to donate that food to those in need.
 
 # How the Project Works
@@ -9,8 +9,7 @@ Hotel Form Submission:
 Donors (hotels) enter the name of the hotel, food description, address, phone number, and the time until which the food will be available for pick-up.
 Once the form is submitted, it is forwarded to the food list.
 Food List:
-Users can see the food items submitted by hotels, including the food description, address, phone number, and pick-up time.
-If a user wants a food item, they can select it, and the item will be removed from the list.  	
+Users can see the food items submitted by hotels, including the food description, address, phone number, and pick-up time. If a user wants a food item, they can select it, and the item will be removed from the list. Another page will open where they can see the details of the food, and they can also download the food description.
 
 # Components
 1. Front Pages:
@@ -35,10 +34,10 @@ If a user wants an item, they can select it, and it will be removed from the foo
 This page is connected with the front pages, complaint, and hotel form.
 
 # Technologies Used
-HTML
-CSS
-JavaScript
-firebase 
+1.HTML
+2.CSS
+3.JavaScript
+4.firebase 
 
 
 # Donors
@@ -54,3 +53,6 @@ firebase
 # Complaints
 
 ![4](https://github.com/user-attachments/assets/43bb3f2e-baa3-492d-bb02-967b27085d06)
+
+demo you can run the code also
+https://zahirkhan389380.github.io/Donation-food/FIREBASE/HOME/pr.html
