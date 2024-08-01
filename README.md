@@ -11,7 +11,7 @@ Food List:
 
 Users can see the food items submitted by hotels, including the food description, address, phone number, and pick-up time.
 If a user wants a food item, they can select it, and the item will be removed from the list. Another page will open where they can see the details of the food, and they can also download the food description.
-# Components
+# Components 
 Home Pages:
 
 These are the initial pages where users can learn about the initiative. Various images will motivate them to donate food.
@@ -53,7 +53,7 @@ Firebase
 
 ![1](https://github.com/user-attachments/assets/f369da32-dbac-43f0-8caf-a4524742c52b)
 
-# user
+# User
 
 ![2](https://github.com/user-attachments/assets/19fff661-eb7e-404e-ab74-a0016be52320)
 ![3](https://github.com/user-attachments/assets/2b0f6388-e161-4b22-b375-ac0a11e5dc7b)
@@ -62,5 +62,5 @@ Firebase
 
 ![4](https://github.com/user-attachments/assets/43bb3f2e-baa3-492d-bb02-967b27085d06)
 
-demo you can run the code also
+Demo you can run the code also
 https://zahirkhan389380.github.io/Donation-food/FIREBASE/HOME/pr.html
