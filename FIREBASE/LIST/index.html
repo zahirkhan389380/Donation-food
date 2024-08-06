@@ -29,20 +29,32 @@
 
             onValue(foodListRef, (snapshot) => {
                 tableBody.innerHTML = ''; // Clear the table body
+                const currentDate = new Date();
                 snapshot.forEach((childSnapshot) => {
                     const item = childSnapshot.val();
-                    const row = document.createElement('tr');
-                    row.dataset.id = childSnapshot.key;
-                    row.innerHTML = `
-                        <td>${item.hotel}</td>
-                        <td>${item.food}</td>
-                        <td>${item.phone}</td>
-                        <td>${item.address}</td>
-                        <td>${item.email}</td>
-                        <td>${item.datetime}</td>
-                        <td><button class="select-btn" data-id="${childSnapshot.key}">Select</button></td>
-                    `;
-                    tableBody.appendChild(row);
+                    const itemDate = new Date(item.datetime);
+
+                    if (itemDate <= currentDate) {
+                        // Remove expired item
+                        const itemRef = ref(database, `zahir_khan/donationForm/${childSnapshot.key}`);
+                        remove(itemRef).catch(error => {
+                            console.error('Error removing item:', error);
+                        });
+                    } else {
+                        // Append non-expired items to the table
+                        const row = document.createElement('tr');
+                        row.dataset.id = childSnapshot.key;
+                        row.innerHTML = `
+                            <td>${item.hotel}</td>
+                            <td>${item.food}</td>
+                            <td>${item.phone}</td>
+                            <td>${item.address}</td>
+                            <td>${item.email}</td>
+                            <td>${item.datetime}</td>
+                            <td><button class="select-btn" data-id="${childSnapshot.key}">Select</button></td>
+                        `;
+                        tableBody.appendChild(row);
+                    }
                 });
 
                 // Attach select event listeners to the newly added buttons
