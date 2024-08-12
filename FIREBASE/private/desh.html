@@ -21,22 +21,25 @@
         </nav>
     </header>
     <div class="content">
-        <h2>LIST OF FOOD ITEMS</h2>
-        <table id="foodListTable">
-            <thead>
-                <tr>
-                    <th>Name</th>
-                    <th>Phone</th>
-                    <th>Email</th>
-                    <th>Message</th>
-                    <th>Reply</th>
-                    <th>Delete</th>
-                </tr>
-            </thead>
-            <tbody id="foodList">
-                <!-- Data will be appended here -->
-            </tbody>
-        </table>
+        <h2>LIST OF COMPLAINTS</h2>
+        <div class="table-responsive">
+            <table id="complaintListTable">
+                <thead>
+                    <tr>
+                        <th>Name</th>
+                        <th>Phone</th>
+                        <th>Email</th>
+                        <th>Message</th>
+                        <th>Status</th>
+                        <th>Reply</th>
+                        <th>Delete</th>
+                    </tr>
+                </thead>
+                <tbody id="complaintList">
+                    <!-- Data will be appended here -->
+                </tbody>
+            </table>
+        </div>
     </div>
     <footer>
         <div class="footer-content">
@@ -52,7 +55,7 @@
 
     <script type="module">
         import { initializeApp } from "https://www.gstatic.com/firebasejs/9.22.1/firebase-app.js";
-        import { getDatabase, ref, onValue, remove } from "https://www.gstatic.com/firebasejs/9.22.1/firebase-database.js";
+        import { getDatabase, ref, onValue, update, remove } from "https://www.gstatic.com/firebasejs/9.22.1/firebase-database.js";
 
         const firebaseConfig = {
             apiKey: "AIzaSyAqQwegSn7TTdX4n9zRj9sd9Dogx3iFx_Y",
@@ -70,7 +73,7 @@
         const database = getDatabase(app);
 
         document.addEventListener('DOMContentLoaded', function() {
-            const tableBody = document.getElementById('foodList');
+            const tableBody = document.getElementById('complaintList');
             
             // Fetch data from Firebase Realtime Database
             const complaintsRef = ref(database, 'complaints');
@@ -88,7 +91,14 @@
                             <td>${data.email}</td>
                             <td>${data.message}</td>
                             <td>
-                                <input type="text" placeholder="Reply" id="reply-${childSnapshot.key}">
+                                <select id="status-${childSnapshot.key}" onchange="updateStatus('${childSnapshot.key}', this)">
+                                    <option value="Pending" ${data.status === 'Pending' ? 'selected' : ''}>Pending</option>
+                                    <option value="Under Process" ${data.status === 'Under Process' ? 'selected' : ''}>Under Process</option>
+                                    <option value="Resolved" ${data.status === 'Resolved' ? 'selected' : ''}>Resolved</option>
+                                </select>
+                            </td>
+                            <td>
+                                <textarea placeholder="Reply" id="reply-${childSnapshot.key}">${data.reply || ''}</textarea>
                                 <button onclick="replyToComplaint('${childSnapshot.key}', 'reply-${childSnapshot.key}', '${data.email}')">Reply</button>
                             </td>
                             <td><button onclick="deleteItem('${childSnapshot.key}', this)">Delete</button></td>
@@ -122,30 +132,64 @@
                 .then(data => {
                     if (data.success) {
                         alert('Email sent successfully.');
+                        // Optionally update the complaint with the reply in the database
+                        const replyRef = ref(database, `complaints/${id}`);
+                        update(replyRef, { reply: reply })
+                            .then(() => console.log('Reply saved to Firebase'))
+                            .catch((error) => console.error('Error updating reply in Firebase:', error));
                         document.getElementById(inputId).value = ''; // Clear the input field
                     } else {
                         alert('Failed to send email.');
                     }
-                })      
+                })
                 .catch(error => console.error('Error sending email:', error));
             } else {
-                alert('Please here enter a reply message.');
+                alert('Please enter a reply message.');
             }
         }
 
-        window.deleteItem = function(id, button) {
-            if (confirm('Are you sure you want to delete this message?')) {
-                // Delete data from Firebase
-                const itemRef = ref(database, `complaints/${id}`);
-                remove(itemRef)
-                    .then(() => {
-                        alert('Item deleted successfully.');
-                        const row = button.closest('tr');
-                        row.parentNode.removeChild(row);
+        window.updateStatus = function(id, selectElement) {
+            const status = selectElement.value;
+            const statusRef = ref(database, `complaints/${id}`);
+            update(statusRef, { status: status })
+                .then(() => {
+                    alert('Status updated successfully.');
+                    // Optionally, send an email notification about the status change
+                    fetch('http://localhost:3000/send-email', {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json'
+                        },
+                        body: JSON.stringify({
+                            email: selectElement.closest('tr').querySelector('td').innerText,
+                            subject: 'Your complaint status has been updated',
+                            message: `The status of your complaint has been updated to: ${status}`
+                        })
                     })
-                    .catch((error) => console.error('Error deleting item:', error));
-            }
-        } 
+                    .then(response => response.json())
+                    .then(data => {
+                        if (data.success) {
+                            console.log('Notification email sent successfully.');
+                        } else {
+                            console.log('Failed to send notification email.');
+                        }
+                    })
+                    .catch(error => console.error('Error sending notification email:', error));
+                })
+                .catch((error) => console.error('Error updating status in Firebase:', error));
+        }
+
+        window.deleteItem = function(id, buttonElement) {
+            const itemRef = ref(database, `complaints/${id}`);
+            remove(itemRef)
+                .then(() => {
+                    const row = buttonElement.closest('tr');
+                    row.remove();
+                    alert('Complaint deleted successfully.');
+                })
+                .catch((error) => console.error('Error deleting complaint from Firebase:', error));
+        }
     </script>
 </body>
 </html>
+
